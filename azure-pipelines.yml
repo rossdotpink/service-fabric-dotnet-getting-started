@@ -12,6 +12,11 @@ variables:
   buildConfiguration: 'release'
 
 steps:
+
+- task: CmdLine@2
+  inputs:
+    script: 'tree /a /f'
+
 - task: NuGetToolInstaller@0
   displayName: NuGet Install
 
@@ -54,6 +59,3 @@ steps:
     PathtoPublish: '$(Build.SourcesDirectory)/GettingStartedApplication/GettingStartedApplication/pkg/Release/GettingStartedApplication.sfpkg'
     ArtifactName: GettingStartedApplication
 
-- task: CmdLine@2
-  inputs:
-    script: 'tree'
