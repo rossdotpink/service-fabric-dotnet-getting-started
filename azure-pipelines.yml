@@ -36,7 +36,7 @@ steps:
 - task: VSBuild@1
   displayName: 'Build GettingStartedApplication sfpkg'
   inputs:
-    solution: '$(Build.SourcesDirectory)/GettingStartedApplication/GettingStartedApplication/GettingStartedApplication.sfproj'
+    solution: '$(Build.SourcesDirectory)/GettingStartedApplication/GettingStartedApplication.sfproj'
     msbuildArgs: '/t:Package'
     platform: x64
     configuration: '$(buildConfiguration)'
