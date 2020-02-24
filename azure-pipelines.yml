@@ -36,10 +36,23 @@ steps:
 - task: VSBuild@1
   displayName: 'Build GettingStartedApplication sfpkg'
   inputs:
-    solution: src/GettingStartedApplication/GettingStartedApplication/GettingStartedApplication.sfproj
+    solution: '$(Build.SourcesDirectory)/GettingStartedApplication/GettingStartedApplication/GettingStartedApplication.sfproj'
     msbuildArgs: '/t:Package'
     platform: x64
     configuration: '$(buildConfiguration)'
+
+- powershell: |
+   Compress-Archive -U -Path "*"  -DestinationPath GettingStartedApplication.zip
+   Rename-Item GettingStartedApplication.zip GettingStartedApplication.sfpkg
+  errorActionPreference: continue
+  workingDirectory: '$(Build.SourcesDirectory)/GettingStartedApplication/GettingStartedApplication/pkg/Release'
+  displayName: 'Create GettingStartedApplication.sfpkg'
+
+- task: PublishBuildArtifacts@1
+  displayName: 'Publish Artifact'
+  inputs:
+    PathtoPublish: '$(Build.SourcesDirectory)/GettingStartedApplication/GettingStartedApplication/pkg/Release/GettingStartedApplication.sfpkg'
+    ArtifactName: GettingStartedApplication
 
 - task: CmdLine@2
   inputs:
