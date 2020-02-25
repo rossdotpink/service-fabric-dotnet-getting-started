@@ -14,6 +14,7 @@ variables:
 steps:
 
 - task: CmdLine@2
+  displayName: Show all files
   inputs:
     script: 'tree /a /f'
 
