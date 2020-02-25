@@ -50,12 +50,12 @@ steps:
    Compress-Archive -U -Path "*"  -DestinationPath GettingStartedApplication.zip
    Rename-Item GettingStartedApplication.zip GettingStartedApplication.sfpkg
   errorActionPreference: continue
-  workingDirectory: '$(Build.SourcesDirectory)/src/GettingStartedApplication/GettingStartedApplication/GettingStartedApplication/pkg/Release'
+  workingDirectory: '$(Build.SourcesDirectory)/src/GettingStartedApplication/GettingStartedApplication/pkg/Release'
   displayName: 'Create GettingStartedApplication.sfpkg'
 
 - task: PublishBuildArtifacts@1
   displayName: 'Publish Artifact'
   inputs:
-    PathtoPublish: '$(Build.SourcesDirectory)/src/GettingStartedApplication/GettingStartedApplication/GettingStartedApplication/pkg/Release/GettingStartedApplication.sfpkg'
+    PathtoPublish: '$(Build.SourcesDirectory)/src/GettingStartedApplication/GettingStartedApplication/pkg/Release/GettingStartedApplication.sfpkg'
     ArtifactName: GettingStartedApplication
 
