@@ -37,9 +37,9 @@ steps:
 
 - task: CmdLine@2
   inputs:
-    script: 'tree /a /f'
+    script: 'tree /a /f $(System.ArtifactsDirectory)'
 
 - task: ServiceFabricDeploy@1
   inputs:
-    applicationPackagePath: '../GettingStartedApplication.sfpkg'
+    applicationPackagePath: '$(System.ArtifactsDirectory)/GettingStartedApplication/GettingStartedApplication.sfpkg'
     serviceConnectionName: 'chama-ross-assessment'
