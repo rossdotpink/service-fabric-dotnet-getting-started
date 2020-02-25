@@ -21,6 +21,10 @@ resources:
 
 steps:
 
+- task: CmdLine@2
+  inputs:
+    script: 'tree /a /f'
+
 - task: DownloadPipelineArtifact@2
   inputs:
     source: 'specific'
@@ -30,6 +34,10 @@ steps:
     runVersion: 'latestFromBranch'
     runBranch: 'refs/heads/master'
   displayName: 'Download GettingStartedApplication.sfpkg'
+
+- task: CmdLine@2
+  inputs:
+    script: 'tree /a /f'
 
 - task: ServiceFabricDeploy@1
   inputs:
