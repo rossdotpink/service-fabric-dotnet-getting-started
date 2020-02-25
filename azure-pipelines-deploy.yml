@@ -11,6 +11,14 @@ variables:
   buildPlatform: 'x64'
   buildConfiguration: 'release'
 
+resources:
+  pipelines:
+  - pipeline: build
+    source: 'Build - service-fabric-dotnet-getting-started'
+    trigger: 
+      branches:
+      - master
+
 steps:
 
 - task: CmdLine@2
@@ -21,11 +29,11 @@ steps:
 - task: DownloadPipelineArtifact@2
   inputs:
     source: 'specific'
-    project: 'FabrikamFiber'
-    pipeline: 12
+    artifact: 'GettingStartedApplication'
+    project: 'rossdotpink'
+    pipeline: 1
     runVersion: 'latestFromBranch'
     runBranch: 'refs/heads/master'
-    tags: 'testTag'
   displayName: 'Download GettingStartedApplication.sfpkg'
 
 - task: CmdLine@2
