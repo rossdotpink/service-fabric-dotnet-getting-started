@@ -42,5 +42,5 @@ steps:
 
 - task: ServiceFabricDeploy@1
   inputs:
-    applicationPackagePath: '$(System.ArtifactsDirectory)/GettingStartedApplication/GettingStartedApplication.sfpkg'
+    applicationPackagePath: '$(System.ArtifactsDirectory)/GettingStartedApplication.sfpkg'
     serviceConnectionName: 'chama-ross-assessment'
