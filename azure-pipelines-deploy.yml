@@ -29,6 +29,7 @@ steps:
   inputs:
     source: 'specific'
     artifact: 'GettingStartedApplication'
+    path: '$(System.ArtifactsDirectory)'
     project: 'rossdotpink'
     pipeline: 1
     runVersion: 'latestFromBranch'
