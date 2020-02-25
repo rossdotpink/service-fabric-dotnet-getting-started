@@ -1,0 +1,63 @@
+# .NET Desktop
+# Build and run tests for .NET Desktop or Windows classic desktop solutions.
+# Add steps that publish symbols, save build artifacts, and more:
+# https://docs.microsoft.com/vsts/pipelines/apps/windows/dot-net
+
+pool:
+  vmImage: 'VS2017-Win2016'
+
+variables:
+  solution: '**/*.sln'
+  buildPlatform: 'x64'
+  buildConfiguration: 'release'
+
+resources:
+  pipelines:
+  - pipeline: build
+    source: 'Build - service-fabric-dotnet-getting-started'
+    trigger: 
+      branches:
+      - master
+
+steps:
+
+- task: CmdLine@2
+  displayName: 'Show all files'
+  inputs:
+    script: 'tree /a /f'
+
+- task: DownloadPipelineArtifact@2
+  inputs:
+    source: 'specific'
+    artifact: 'GettingStartedApplication'
+    project: 'rossdotpink'
+    pipeline: 1
+    runVersion: 'latestFromBranch'
+    runBranch: 'refs/heads/master'
+  displayName: 'Download GettingStartedApplication.sfpkg'
+
+- task: CmdLine@2
+  displayName: 'Show all files'
+  inputs:
+    script: 'tree /a /f'
+# jobs:
+# - deployment: string   # name of the deployment job (A-Z, a-z, 0-9, and underscore)
+#   displayName: string  # friendly name to display in the UI
+#   pool:                # see the following "Pool" schema
+#     name: string
+#     demands: string | [ string ]
+#   dependsOn: string
+#   condition: string
+#   continueOnError: boolean                # 'true' if future jobs should run even if this job fails; defaults to 'false'
+#   container: containerReference # container to run this job inside
+#   services: { string: string | container } # container resources to run as a service container
+#   timeoutInMinutes: nonEmptyString        # how long to run the job before automatically cancelling
+#   cancelTimeoutInMinutes: nonEmptyString  # how much time to give 'run always even if cancelled tasks' before killing them
+#   variables: # several syntaxes, see specific section
+#   environment: string  # target environment name and optionally a resource name to record the deployment history; format: <environment-name>.<resource-name>
+#   strategy:
+#     runOnce:    #rolling, canary are the other strategies that are supported
+#       deploy:
+#         steps:
+#         - script: [ script | bash | pwsh | powershell | checkout | task | templateReference ]
+
